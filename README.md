@@ -1,5 +1,5 @@
 # bw-docker
-The latest Bitwarden CLI in a Docker container!
+The latest Bitwarden CLI in a Docker container.
 
 ## Instructions
 Run `docker build -t bw:focal .`
