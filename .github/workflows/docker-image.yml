@@ -23,4 +23,4 @@ jobs:
     - name: docker build
       run: docker build . --file Dockerfile --tag bw-cli:amd64
     - name: docker push
-      run: docker push ${{secrets.DOCKER_USER}}/bw-cli
+      run: docker push ${{secrets.DOCKER_USER}}/bw-cli:amd64
