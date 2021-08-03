@@ -5,3 +5,4 @@ RUN export VER=$(curl https://github.com/bitwarden/cli/releases/latest | grep -o
 curl -LO "https://github.com/bitwarden/cli/releases/download/v{$VER}/bw-linux-{$VER}.zip" \
 && unzip *.zip && chmod +x ./bw
 ENTRYPOINT ["bw"]
+
