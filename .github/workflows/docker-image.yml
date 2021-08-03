@@ -31,7 +31,7 @@ jobs:
         DOCKER_USER: ${{ secrets.DOCKER_USER }}
         DOCKER_PASS: ${{ secrets.DOCKER_PASSWORD }}
       with:
-        destination_container_repo: ${{ secrets.DOCKER_USER }}/pyporwave
+        destination_container_repo: ${{ secrets.DOCKER_USER }}/bw-cli
         provider: dockerhub
         short_description: 'The latest Bitwarden CLI in a Docker container.'
         readme_file: 'README.md'
