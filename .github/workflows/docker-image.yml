@@ -24,3 +24,14 @@ jobs:
       run: docker build . --file Dockerfile --tag ${{ secrets.DOCKER_USER }}/bw-cli:amd64
     - name: docker push
       run: docker push ${{ secrets.DOCKER_USER }}/bw-cli:amd64
+
+    - name: push README to Dockerhub
+      uses: christian-korneck/update-container-description-action@v1
+      env:
+        DOCKER_USER: ${{ secrets.DOCKER_USER }}
+        DOCKER_PASS: ${{ secrets.DOCKER_PASSWORD }}
+      with:
+        destination_container_repo: ${{ secrets.DOCKER_USER }}/pyporwave
+        provider: dockerhub
+        short_description: 'The latest Bitwarden CLI in a Docker container.'
+        readme_file: 'README.md'
