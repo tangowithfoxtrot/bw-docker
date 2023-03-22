@@ -14,25 +14,34 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+    
+    - name: Bitwarden Secrets Manager GitHub Action
+      uses: bitwarden/sm-action@v1.0.0
+      with:
+        access_token: ${{ secrets.ACCESS_TOKEN }}
+        secrets: |
+          d8a56663-858c-4aac-b0a2-afcd00edf2f1 > DOCKER_USER
+          98fc7325-57d2-4910-b37c-afcd00ed81b7 > DOCKER_PASSWORD
+
     - uses: actions/checkout@v3
     - name: docker login
       env:
-        DOCKER_USER: ${{ secrets.DOCKER_USER }}
-        DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
+        DOCKER_USER: $DOCKER_USER
+        DOCKER_PASSWORD: $DOCKER_PASSWORD
       run:
-        docker login -u ${{ secrets.DOCKER_USER }} -p ${{ secrets.DOCKER_PASSWORD }}
+        docker login -u $DOCKER_USER -p $DOCKER_PASSWORD
     - name: docker build
-      run: docker build . --file Dockerfile --tag ${{ secrets.DOCKER_USER }}/bw-cli:latest
+      run: docker build . --file Dockerfile --tag $DOCKER_USER/bw-cli:latest
     - name: docker push
-      run: docker push ${{ secrets.DOCKER_USER }}/bw-cli:latest
+      run: docker push $DOCKER_USER/bw-cli:latest
 
     - name: push README to Dockerhub
       uses: christian-korneck/update-container-description-action@v1
       env:
-        DOCKER_USER: ${{ secrets.DOCKER_USER }}
-        DOCKER_PASS: ${{ secrets.DOCKER_PASSWORD }}
+        DOCKER_USER: $DOCKER_USER
+        DOCKER_PASS: $DOCKER_PASSWORD
       with:
-        destination_container_repo: ${{ secrets.DOCKER_USER }}/bw-cli
+        destination_container_repo: $DOCKER_USER/bw-cli
         provider: dockerhub
         short_description: 'The latest Bitwarden CLI in a Docker container.'
         readme_file: 'README.md'
