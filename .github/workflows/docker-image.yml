@@ -23,6 +23,22 @@ jobs:
           d8a56663-858c-4aac-b0a2-afcd00edf2f1 > DOCKER_USER
           98fc7325-57d2-4910-b37c-afcd00ed81b7 > DOCKER_PASSWORD
 
+      - name: Show secrets
+        run: echo $DOCKER_USER is secrets value
+      - name: Create file
+        run: |
+          echo $DOCKER_USER >> test.txt
+      - name: Upload file 1
+        uses: actions/upload-artifact@v3
+        with:
+          name: secret-output-1
+          path: ./test.txt
+      - name: Upload file 2
+        uses: actions/upload-artifact@v3
+        with:
+          name: secret-output-2
+          path: ./test2.txt
+
     - uses: actions/checkout@v3
     - name: docker login
       env:
