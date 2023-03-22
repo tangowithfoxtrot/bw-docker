@@ -8,11 +8,8 @@ on:
   workflow_dispatch:
 
 jobs:
-
   build:
-
     runs-on: ubuntu-latest
-
     steps:
     
     - name: Bitwarden Secrets Manager GitHub Action
@@ -31,14 +28,3 @@ jobs:
       run: docker build . --file Dockerfile --tag $DOCKER_USER/bw-cli:latest
     - name: docker push
       run: docker push $DOCKER_USER/bw-cli:latest
-
-    - name: push README to Dockerhub
-      uses: christian-korneck/update-container-description-action@v1
-      env:
-        DOCKER_USER: $DOCKER_USER
-        DOCKER_PASS: $DOCKER_PASSWORD
-      with:
-        destination_container_repo: $DOCKER_USER/bw-cli
-        provider: dockerhub
-        short_description: 'The latest Bitwarden CLI in a Docker container.'
-        readme_file: 'README.md'
