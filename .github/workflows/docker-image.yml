@@ -25,6 +25,6 @@ jobs:
       run:
         docker login -u $DOCKER_USER -p $DOCKER_PASSWORD
     - name: docker build
-      run: docker build . --file Dockerfile --tag $DOCKER_USER/bw-cli:latest
+      run: docker build . --file Dockerfile --tag $DOCKER_USER/bw-cli:serve-latest
     - name: docker push
-      run: docker push $DOCKER_USER/bw-cli:latest
+      run: docker push $DOCKER_USER/bw-cli:serve-latest
