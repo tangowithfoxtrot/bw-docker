@@ -1,4 +1,6 @@
-FROM ubuntu:latest
+FROM --platform=linux/amd64 debian:latest
+ENV DEBIAN_FRONTEND=noninteractive
+
 WORKDIR /usr/local/bin
 RUN apt update && apt install -y curl unzip libsecret-1-0 jq supervisor
 RUN mkdir -p /var/log/supervisor
