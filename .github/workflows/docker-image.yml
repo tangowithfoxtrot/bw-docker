@@ -1,30 +1,32 @@
-name: Docker Image CI
+name: Push to Docker Hub
 
 on:
-  push:
-    branches: [ main ]
-  pull_request:
-    branches: [ main ]
   workflow_dispatch:
+    inputs:
+      version:
+        description: "bw version (just the numbers, e.g. 2023.7.0)"
+        required: true
+        type: string
 
 jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-    
-    - name: Bitwarden Secrets Manager GitHub Action
-      uses: bitwarden/sm-action@v1.0.0
-      with:
-        access_token: ${{ secrets.ACCESS_TOKEN }}
-        secrets: |
-          d8a56663-858c-4aac-b0a2-afcd00edf2f1 > DOCKER_USER
-          98fc7325-57d2-4910-b37c-afcd00ed81b7 > DOCKER_PASSWORD
+      - name: Bitwarden Secrets Manager GitHub Action
+        uses: bitwarden/sm-action@v1.0.0
+        with:
+          access_token: ${{ secrets.ACCESS_TOKEN }}
+          secrets: |
+            d8a56663-858c-4aac-b0a2-afcd00edf2f1 > DOCKER_USER
+            98fc7325-57d2-4910-b37c-afcd00ed81b7 > DOCKER_PASSWORD
 
-    - uses: actions/checkout@v3
-    - name: docker login
-      run:
-        docker login -u $DOCKER_USER -p $DOCKER_PASSWORD
-    - name: docker build
-      run: docker build . --file Dockerfile --tag $DOCKER_USER/bw-cli:latest
-    - name: docker push
-      run: docker push $DOCKER_USER/bw-cli:latest
+      - uses: actions/checkout@v3
+      - name: docker login
+        run: docker login -u $DOCKER_USER -p $DOCKER_PASSWORD
+      - name: docker build
+        run: |
+          docker build . --file Dockerfile --tag $DOCKER_USER/bw-cli:latest \
+          --tag $DOCKER_USER/bw-cli:${{ github.event.inputs.version }} \
+          --tag $DOCKER_USER/bw-cli:v${{ github.event.inputs.version }}
+      - name: docker push
+        run: docker push -a $DOCKER_USER/bw-cli
