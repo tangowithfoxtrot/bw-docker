@@ -18,7 +18,7 @@ services:
     ports:
       - "127.0.0.1:${SERVE_PORT:-8087}:${SERVE_PORT:-8087}"
     healthcheck:
-      test: curl -f http://localhost:${SERVE_PORT}/status || exit 1
+      test: curl -f http://localhost:${SERVE_PORT:-8087}/status || exit 1
       interval: 5s
       timeout: 2s
       retries: 3
