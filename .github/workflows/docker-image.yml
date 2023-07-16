@@ -4,7 +4,7 @@ on:
   workflow_dispatch:
     inputs:
       version:
-        description: "Bitwarden CLI version"
+        description: "bw version (just the numbers, e.g. 2023.7.0)"
         required: true
         type: string
 
@@ -24,6 +24,9 @@ jobs:
       - name: docker login
         run: docker login -u $DOCKER_USER -p $DOCKER_PASSWORD
       - name: docker build
-        run: docker build . --file Dockerfile --tag $DOCKER_USER/bw-cli:latest --tag $DOCKER_USER/bw-cli:${{ github.event.inputs.version }}
+        run: |
+          docker build . --file Dockerfile --tag $DOCKER_USER/bw-cli:latest \
+          --tag $DOCKER_USER/bw-cli:${{ github.event.inputs.version }} \
+          --tag $DOCKER_USER/bw-cli:v${{ github.event.inputs.version }}
       - name: docker push
         run: docker push $DOCKER_USER/bw-cli:latest
