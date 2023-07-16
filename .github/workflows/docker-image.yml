@@ -29,4 +29,4 @@ jobs:
           --tag $DOCKER_USER/bw-cli:${{ github.event.inputs.version }} \
           --tag $DOCKER_USER/bw-cli:v${{ github.event.inputs.version }}
       - name: docker push
-        run: docker push $DOCKER_USER/bw-cli:latest
+        run: docker push -a $DOCKER_USER/bw-cli:latest
