@@ -19,15 +19,10 @@ services:
     hostname: bw_api
     platform: linux/amd64
     image: tangowithfoxtrot/bw-cli:${TAG:-latest}
-    # build:
-    #   context: .
-    #   dockerfile: Dockerfile
-    env_file:
-      - .env
-    environment:
-      UNLOCK_VAULT: true
-    # volumes: # uncomment to use Bitwarden CLI data from host
-    #   - "$HOME/.config/Bitwarden CLI:/root/.config/Bitwarden CLI" # Linux
+    # environment: # uncomment if you're passing $VAULT_PASSWORD as a secret to unlock the vault
+    #   UNLOCK_VAULT: true
+    volumes:
+      - "$HOME/.config/Bitwarden CLI:/root/.config/Bitwarden CLI" # Linux
     #   - "$HOME/Library/Application Support/Bitwarden CLI:/root/.config/Bitwarden CLI" # macOS
     ports:
       - "127.0.0.1:${SERVE_PORT:-8087}:${SERVE_PORT:-8087}"
