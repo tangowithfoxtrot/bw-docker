@@ -1,4 +1,4 @@
-#!/usr/bin/env bash
+#!/bin/bash
 
 # to enable interactive CLI usage
 if [[ $# -gt 0 ]]; then
