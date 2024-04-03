@@ -28,7 +28,7 @@ BW_SERVE_PID=$!
 echo "\`bw serve\` pid: $BW_SERVE_PID"
 
 if [[ "$UNLOCK_VAULT" == "true" ]]; then
-  while ! curl -sX POST -H "Content-Type: application/json" -d "{\"password\": \"$VAULT_PASSWORD\"}" "http://localhost:$SERVE_PORT/unlock" >/dev/null; do
+  while ! curl -sX POST -H "Content-Type: application/json" -d "{\"password\": \"$VAULT_PASSWORD\"}" "http://localhost:${SERVE_PORT:-8087}/unlock" >/dev/null; do
     sleep 1
   done
   echo "Vault unlocked!"
