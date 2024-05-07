@@ -25,8 +25,9 @@ jobs:
         run: docker login -u $DOCKER_USER -p $DOCKER_PASSWORD
       - name: docker build
         run: |
-          docker build . --file Dockerfile --tag $DOCKER_USER/bw-cli:latest-scratch \
-          --tag $DOCKER_USER/bw-cli:scratch-${{ github.event.inputs.version }} \
-          --tag $DOCKER_USER/bw-cli:scratch-v${{ github.event.inputs.version }}
+          docker build . --file Dockerfile --tag $DOCKER_USER/bw-cli:latest-busybox \
+          --tag $DOCKER_USER/bw-cli:busybox-latest \
+          --tag $DOCKER_USER/bw-cli:busybox-${{ github.event.inputs.version }} \
+          --tag $DOCKER_USER/bw-cli:busybox-v${{ github.event.inputs.version }}
       - name: docker push
         run: docker push -a $DOCKER_USER/bw-cli
