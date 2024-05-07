@@ -10,11 +10,11 @@ STATUS="$(bw status | jq -r '.status')"
 
 if [[ -n "$MFA_CODE" ]]; then
   # shellcheck disable=SC2034
-  export MFA_LOGIN="--method 0 --code $MFA_CODE"
+  MFA_LOGIN="--method 0 --code $MFA_CODE"
 fi
 
 if [[ -n "$BW_CLIENTSECRET" ]]; then
-  export API_LOGIN="--apikey"
+  API_LOGIN="--apikey"
 fi
 
 if [[ "$STATUS" == "unauthenticated" ]]; then
