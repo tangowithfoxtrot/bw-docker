@@ -18,7 +18,7 @@ services:
     container_name: bw_api
     hostname: bw_api
     platform: linux/amd64
-    image: tangowithfoxtrot/bw-cli:${TAG:-latest}
+    image: tangowithfoxtrot/bw-cli:${TAG:-busybox-lastest}
     # environment: # uncomment if you're passing $VAULT_PASSWORD as a secret to unlock the vault
     #   UNLOCK_VAULT: true
     volumes:
