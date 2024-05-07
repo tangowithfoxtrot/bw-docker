@@ -1,18 +1,21 @@
 # bw-docker
+
 The latest Bitwarden CLI in a Docker container.
 
 ## Instructions
+
 ### Interactive CLI
+
 Run `docker build -t bw-cli:latest .`
 
 Then, `docker run -v $HOME/.config/Bitwarden\ CLI/:/root/.config/Bitwarden\ CLI/ -it bw-cli:latest login`
 
 ### Serve API
+
 Create a local [Vault Management API](https://bitwarden.com/help/vault-management-api/) instance:
 
 `docker-compose.yml`
 ```yaml
-version: "3.3"
 services:
   bw_api:
     container_name: bw_api
