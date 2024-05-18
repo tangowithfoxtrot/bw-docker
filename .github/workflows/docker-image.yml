@@ -27,6 +27,7 @@ jobs:
         run: |
           docker build . --file Dockerfile --tag $DOCKER_USER/bw-cli:latest-busybox \|
             --provenance=mode=max \
+            --sbom=true \
             --tag $DOCKER_USER/bw-cli:busybox-latest \
             --tag $DOCKER_USER/bw-cli:busybox-${{ github.event.inputs.version }} \
             --tag $DOCKER_USER/bw-cli:busybox-v${{ github.event.inputs.version }}
