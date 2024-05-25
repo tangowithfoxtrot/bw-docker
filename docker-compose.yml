@@ -1,4 +1,3 @@
-version: "3.3"
 services:
   bw_api:
     container_name: bw_api
