@@ -30,7 +30,7 @@ if [ "$UNLOCK_VAULT" = "true" ]; then
     unset BW_TMP_SESSION
   else
     # shellcheck disable=SC2155
-    export BW_SESSION="$(bw unlock --raw)"
+    export BW_SESSION="$(bw unlock --raw "$VAULT_PASSWORD")"
   fi
   sleep 1
 
