@@ -29,10 +29,4 @@ services:
     #   - "$HOME/Library/Application Support/Bitwarden CLI:/root/.config/Bitwarden CLI" # macOS
     ports:
       - "127.0.0.1:${SERVE_PORT:-8087}:${SERVE_PORT:-8087}"
-    healthcheck:
-      test: curl -f http://localhost:${SERVE_PORT:-8087}/status || exit 1
-      interval: 5s
-      timeout: 2s
-      retries: 3
-      start_period: 5s
 ```
